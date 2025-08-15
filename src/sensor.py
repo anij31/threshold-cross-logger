@@ -2,16 +2,26 @@
 Implements sensor class
 """
 
+from __future__ import annotations
+from dataclasses import dataclass, field
+from typing import Set, Optional
+import uuid
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
 class Sensor:
-    def __init__(self, sensor_name=None, sensor_type: str=""):
-        self._sensor_name = sensor_name
-        self._sensor_id = None
-        self._sensor_type: str = sensor_type
-        self._dependencies = set()
+    sensor_name: str
+    sensor_type: str
+    sensor_id: str = field(default_factory=lambda: str(uuid.uuid4()), init=True)
+    dependencies: Set[str] = field(default_factory=set)
 
-    def create_sensor(self, sensor_name: str, sensor_type: str):
+    def rename(self, new_name: str) -> None:
         pass
 
-    def create_sensor_table(self):
-        pass
+    
+
+
 
